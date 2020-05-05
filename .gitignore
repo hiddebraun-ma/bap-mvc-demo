@@ -1,0 +1,19 @@
+# Bestanden die je niet in Git wil zet je in een .gitignore file
+# Check: https://github.com/github/gitignore/tree/master/Global voor standaard Gitignore regels voor veelgebruikte editors
+
+# PHPStorm configuratie bestanden niet in Git
+.idea/
+
+# Visual Studio code configuration niet in Git
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Nooit de vendor of node_modules mappen in Git zetten
+/vendor
+/node_modules
+
+# Ook onze gevoelige gegevens (usernames, passwords e.d.) NOOIT in Git
+/private/includes/config.php
