@@ -15,10 +15,9 @@ function dbConnect() {
 	$config = get_config('DB');
 
 	try {
-		$dsn = 'mysql:host=' . $config('HOSTNAME') . ';dbname=' . $config['DATABASE'] . ';charset=utf8';
+		$dsn = 'mysql:host=' . $config['HOSTNAME'] . ';dbname=' . $config['DATABASE'] . ';charset=utf8';
 
 		$connection = new PDO( $dsn, $config['USER'], $config['PASSWORD'] );
-
 		$connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$connection->setAttribute( PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC );
 
