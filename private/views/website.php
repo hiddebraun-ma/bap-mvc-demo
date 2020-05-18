@@ -9,19 +9,18 @@
 </head>
 <body>
 <header>
-    <h1>Website titel</h1>
+    <h1>BuurtBoodschappen</h1>
 </header>
 <nav>
-    Hoofdmenu
+    <?php echo $this->section('navigation')?>
 </nav>
 <main>
     <section class="content">
-        <h2>Pagina titel</h2>
-        Pagina inhoud
+	    <?php echo $this->section('content')?>
     </section>
     <aside>
         <div class="top-10">
-           Sidebar
+	        <?php echo $this->section('sidebar')?>
         </div>
     </aside>
 </main>

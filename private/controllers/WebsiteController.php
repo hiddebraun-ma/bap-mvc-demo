@@ -14,7 +14,8 @@ class WebsiteController {
 
 	public function home() {
 
-		echo "Welkom op de homepage";
+		$template_engine = get_template_engine();
+		echo $template_engine->render('homepage');
 
 	}
 
