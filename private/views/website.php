@@ -12,15 +12,19 @@
     <h1>BuurtBoodschappen</h1>
 </header>
 <nav>
-    <?php echo $this->section('navigation')?>
+	<?php if ( $this->section( 'navigation' ) ): ?>
+		<?php echo $this->section( 'navigation' ) ?>
+	<?php else: ?>
+		<?php echo $this->fetch( '_navigation' ) ?>
+	<?php endif ?>
 </nav>
 <main>
     <section class="content">
-	    <?php echo $this->section('content')?>
+		<?php echo $this->section( 'content' ) ?>
     </section>
     <aside>
         <div class="top-10">
-	        <?php echo $this->section('sidebar')?>
+			<?php echo $this->section( 'sidebar' ) ?>
         </div>
     </aside>
 </main>

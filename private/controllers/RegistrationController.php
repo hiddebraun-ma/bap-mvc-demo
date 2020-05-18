@@ -14,7 +14,8 @@ class RegistrationController {
 
 	public function registrationForm() {
 
-		echo "Hier komt het registratie formulier";
+		$temmplate_engine = get_template_engine();
+		echo $temmplate_engine->render('register_form');
 
 	}
 
@@ -22,6 +23,10 @@ class RegistrationController {
 
 		echo "Hier wordt het registratie formulier afgehandeld";
 
+	}
+
+	public function confirmRegistration() {
+		echo "Hier wordt de bevestigingslink met code afgehandeld en de gebruiker geactiveerd (als de code klopt)";
 	}
 
 }

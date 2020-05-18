@@ -12,7 +12,8 @@ class LoginController {
 
 	public function loginForm() {
 
-		echo "Hier komt het login formulier";
+		$template_engine = get_template_engine();
+		echo $template_engine->render('login_form');
 
 	}
 

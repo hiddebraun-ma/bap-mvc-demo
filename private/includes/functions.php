@@ -12,7 +12,7 @@ require_once __DIR__ . '/route_helpers.php';
  */
 function dbConnect() {
 
-	$config = get_config('DB');
+	$config = get_config( 'DB' );
 
 	try {
 		$dsn = 'mysql:host=' . $config['HOSTNAME'] . ';dbname=' . $config['DATABASE'] . ';charset=utf8';
@@ -44,10 +44,10 @@ function site_url( $path = '' ) {
 
 function get_config( $name ) {
 	$config = require __DIR__ . '/config.php';
-	$name = strtoupper( $name );
+	$name   = strtoupper( $name );
 
 	if ( isset( $config[ $name ] ) ) {
-		return $config[$name];
+		return $config[ $name ];
 	}
 
 	throw new \InvalidArgumentException( 'Er bestaat geen instelling met de key: ' . $name );
@@ -62,5 +62,24 @@ function get_template_engine() {
 	$templates_path = get_config( 'PRIVATE' ) . '/views';
 
 	return new League\Plates\Engine( $templates_path );
+
+}
+
+/**
+ * Geef de naam (name) van de route aan deze functie, en de functie geeft
+ * terug of dat de route is waar je nu bent
+ *
+ * @param $name
+ *
+ * @return bool
+ */
+function current_route_is( $name ) {
+	$route = request()->getLoadedRoute();
+
+	if ( $route ) {
+		return $route->hasName( $name );
+	}
+
+	return false;
 
 }
