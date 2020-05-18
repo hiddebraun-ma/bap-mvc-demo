@@ -3,7 +3,7 @@
 namespace Website\Controllers;
 
 /**
- * Class HomeController
+ * Class WebsiteController
  *
  * Deze handelt de logica van de homepage af
  * Haalt gegevens uit de "model" laag van de website (de gegevens)
@@ -14,10 +14,9 @@ class WebsiteController {
 
 	public function home() {
 
-		echo "Welkom op de homepage!";
-
-//		$template_engine = get_template_engine();
-//		echo $template_engine->render('homepage');
+		echo "Welkom op de homepage";
 
 	}
+
+
 }
