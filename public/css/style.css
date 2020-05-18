@@ -2,4 +2,84 @@
 
 body {
     font-family: "Nunito", "Open Sans", Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-top: 0;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+header {
+    padding: 20px;
+    background: navy;
+    color: #fff;
+}
+
+header h1 {
+    margin-bottom: 0;
+}
+
+nav {
+    padding: 0 20px;
+    background: green;
+    color: #fff;
+    }
+
+.content  {
+    background: #ededed;
+    min-height: 100px;
+    padding: 20px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: block;
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li .active, nav ul li a:hover {
+    color: #000;
+    background: #fff
+}
+
+
+aside  {
+    background: #ededed;
+    min-height: 100px;
+    padding: 20px;
+}
+
+.top-10 ol {
+    margin: 0;
+    padding: 0 20px;
+}
+
+footer {
+    margin-top: 10px;
+    padding: 20px;
+}
+
+@media screen and (min-width: 900px){
+    main {
+        grid-template-columns: 1fr 350px;
+    }
 }
