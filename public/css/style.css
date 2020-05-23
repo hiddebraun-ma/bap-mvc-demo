@@ -2,22 +2,19 @@
 
 body {
     font-family: "Nunito", "Open Sans", Arial, Helvetica, sans-serif;
-    margin: 0;
-}
-
-h1, h2, h3, h4, h5 {
-    margin-top: 0;
+    background: rgba(20, 58, 135, 0.8);
 }
 
 main {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 20px;
+    background: #fff;
 }
 
 header {
     padding: 20px;
-    background: navy;
+    background: rgba(0, 13, 39);
     color: #fff;
 }
 
@@ -26,13 +23,13 @@ header h1 {
 }
 
 nav {
-    padding: 0 20px;
-    background: green;
+    padding: 20px;
+    background: rgb(162, 184, 232);
     color: #fff;
-    }
+}
 
-.content  {
-    background: #ededed;
+.content {
+    background: #ffffff;
     min-height: 100px;
     padding: 20px;
 }
@@ -62,8 +59,8 @@ nav ul li .active, nav ul li a:hover {
 }
 
 
-aside  {
-    background: #ededed;
+aside {
+    background: rgb(162, 184, 232);
     min-height: 100px;
     padding: 20px;
 }
@@ -74,11 +71,12 @@ aside  {
 }
 
 footer {
-    margin-top: 10px;
     padding: 20px;
+    color: #fff;
+    background: rgba(0, 13, 39);
 }
 
-@media screen and (min-width: 900px){
+@media screen and (min-width: 900px) {
     main {
         grid-template-columns: 1fr 350px;
     }

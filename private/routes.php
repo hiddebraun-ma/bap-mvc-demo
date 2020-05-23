@@ -13,26 +13,8 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 
 	SimpleRouter::get( '/', 'WebsiteController@home' )->name( 'home' );
 
-	// Registratie
-	SimpleRouter::get( '/registreren', 'RegistrationController@registrationForm' )->name( 'register.form' );
-	SimpleRouter::post( '/registreren/verwerken', 'RegistrationController@handleRegistrationForm' )->name( 'register.handle' );
-	SimpleRouter::get( '/registreren/bevestigen/', 'RegistrationController@confirmRegistration' )->name( 'register.confirm' );
-
-	// Kaart met markers
-	SimpleRouter::get( '/op-de-kaart', 'MapController@showMap' )->name( 'map' );
-	SimpleRouter::get( '/op-de-kaart/data', 'MapController@getJsonData' )->name( 'map.json' );
-
-	// Contact formulier
-	SimpleRouter::get( '/contact', 'ContactController@contactForm' )->name( 'contact.form' );
-	SimpleRouter::get( '/contact/versturen', 'ContactController@handleContactForm' )->name( 'contact.handle' );
-
-	// Login - Logout
-	SimpleRouter::get( '/login', 'LoginController@loginForm' )->name( 'login.form' );
-	SimpleRouter::post( '/login/verwerken', 'LoginController@handleLoginForm' )->name( 'login.handle' );
-	SimpleRouter::get( '/logout', 'LoginController@logout' )->name( 'logout' );
 
 	// STOP: Tot hier al je eigen URL's zetten
-
 	SimpleRouter::get( '/not-found', function () {
 		http_response_code( 404 );
 
