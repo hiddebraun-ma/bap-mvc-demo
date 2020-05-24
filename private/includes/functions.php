@@ -83,3 +83,64 @@ function current_route_is( $name ) {
 	return false;
 
 }
+
+function validateRegistrationData($data){
+
+	$errors = [];
+
+	// Checks: valideren of email echt een geldig email is
+	$email      = filter_var( $data['email'], FILTER_VALIDATE_EMAIL );
+	$wachtwoord = trim( $data['wachtwoord'] );
+
+	if ( $email === false ) {
+		$errors['email'] = 'Geen geldig email ingevuld';
+	}
+
+	// Checks: wachtwoord minimaal 6 tekens bevat
+	if ( strlen( $wachtwoord ) < 6 ) {
+		$errors['wachtwoord'] = 'Geen geldig wachtwoord (minimaal 6 tekens)';
+	}
+
+	// Resultaat array
+	$data = [
+		'email' => $data['email'],
+		'wachtwoord' => $wachtwoord
+	];
+
+	return [
+		'data' => $data,
+		'errors' => $errors
+	];
+
+}
+
+
+function userNotRegistered($email){
+
+	// Checken of de gebruiker al bestaat
+	$connection = dbConnect();
+	$sql        = "SELECT * FROM `gebruikers` WHERE `email` = :email";
+	$statement  = $connection->prepare( $sql );
+	$statement->execute( [ 'email' => $email ] );
+
+	return ($statement->rowCount() === 0);
+
+}
+
+function createUser($email, $wachtwoord){
+
+	$connection = dbConnect();
+
+	//Als die er niet is, dan verder met opslaan
+	$sql           = "INSERT INTO `gebruikers` (`email`, `wachtwoord`) VALUES (:email, :wachtwoord)";
+	$statement     = $connection->prepare( $sql );
+	$safe_password = password_hash( $wachtwoord, PASSWORD_DEFAULT );
+	$params        = [
+		'email'      => $email,
+		'wachtwoord' => $safe_password
+	];
+	$statement->execute( $params );
+
+}
+
+
