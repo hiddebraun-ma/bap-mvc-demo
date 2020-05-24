@@ -34,7 +34,7 @@ class RegistrationController {
 
 			} else {
 				//Anders foutmelding tonen
-				$errors['email'] = 'Dit account bestaat al';
+				$result['errors']['email'] = 'Dit account bestaat al';
 			}
 
 		}
