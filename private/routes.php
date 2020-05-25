@@ -14,10 +14,16 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/', 'WebsiteController@home' )->name( 'home' );
 
 	// Routes naar de registratie functionaliteit
-	SimpleRouter::get('/registreren', 'RegistrationController@registrationForm')->name('register.form');
-	SimpleRouter::post('/registreren/verwerken', 'RegistrationController@handleRegistrationForm')->name('register.handle');
-	SimpleRouter::get('/registreren/bedankt', 'RegistrationController@registrationThankYou')->name('register.thankyou');
+	SimpleRouter::get( '/registreren', 'RegistrationController@registrationForm' )->name( 'register.form' );
+	SimpleRouter::post( '/registreren/verwerken', 'RegistrationController@handleRegistrationForm' )->name( 'register.handle' );
+	SimpleRouter::get( '/registreren/bedankt', 'RegistrationController@registrationThankYou' )->name( 'register.thankyou' );
 
+	// Login routes
+	SimpleRouter::get( '/login', 'LoginController@loginForm' )->name( 'login.form' );
+	SimpleRouter::post( '/login/verwerken', 'LoginController@handleLoginForm' )->name( 'login.handle' );
+	SimpleRouter::get( '/logout', 'LoginController@logout' )->name( 'logout' );
+
+	SimpleRouter::get( '/ingelogd/dashboard', 'LoginController@userDashboard' )->name( 'login.dashboard' );
 
 	// STOP: Tot hier al je eigen URL's zetten
 	SimpleRouter::get( '/not-found', function () {

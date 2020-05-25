@@ -114,7 +114,6 @@ function validateRegistrationData($data){
 
 }
 
-
 function userNotRegistered($email){
 
 	// Checken of de gebruiker al bestaat
@@ -126,6 +125,7 @@ function userNotRegistered($email){
 	return ($statement->rowCount() === 0);
 
 }
+
 
 function createUser($email, $wachtwoord){
 
@@ -143,4 +143,41 @@ function createUser($email, $wachtwoord){
 
 }
 
+function loginUser($user){
+	$_SESSION['user_id'] = $user['id'];
+}
+
+function logoutUser(){
+	unset($_SESSION['user_id']);
+}
+
+function isLoggedIn(){
+	return !empty( $_SESSION['user_id'] );
+}
+
+function loginCheck() {
+	if ( ! isLoggedIn() ) {
+		$login_url = url( 'login.form' );
+		redirect( $login_url );
+	}
+}
+
+function getLoggedInUserEmail(){
+
+	$email = "NIET INGELOGD";
+
+	if(!isLoggedIn()){
+		return $email;
+	}
+
+	$user_id = $_SESSION['user_id'];
+	$user = getUserById($user_id);
+
+	if($user){
+		$email = $user['email'];
+	}
+
+	return $email;
+
+}
 
