@@ -5,6 +5,7 @@
   "require": {
     "pecee/simple-router": "^4.2",
     "league/plates": "3.3.*",
+    "swiftmailer/swiftmailer": "^6.0",
     "ext-pdo": "*"
   },
   "require-dev": {

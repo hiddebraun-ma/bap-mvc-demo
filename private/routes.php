@@ -17,6 +17,7 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/registreren', 'RegistrationController@registrationForm' )->name( 'register.form' );
 	SimpleRouter::post( '/registreren/verwerken', 'RegistrationController@handleRegistrationForm' )->name( 'register.handle' );
 	SimpleRouter::get( '/registreren/bedankt', 'RegistrationController@registrationThankYou' )->name( 'register.thankyou' );
+	SimpleRouter::get( '/registreren/bevestigen/{code}', 'RegistrationController@confirmRegistration' )->name( 'register.name' );
 
 	// Login routes
 	SimpleRouter::get( '/login', 'LoginController@loginForm' )->name( 'login.form' );
@@ -24,6 +25,10 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/logout', 'LoginController@logout' )->name( 'logout' );
 
 	SimpleRouter::get( '/ingelogd/dashboard', 'LoginController@userDashboard' )->name( 'login.dashboard' );
+	SimpleRouter::get( '/stuur-test-email', 'EmailController@sendTestEmail' )->name( 'email.test' );
+
+	SimpleRouter::get( '/blogs', 'BlogController@blogIndex' )->name( 'blog.index' );
+	SimpleRouter::get( '/blogs/{id}', 'BlogController@blogDetail' )->name( 'blog.detail' );
 
 	// STOP: Tot hier al je eigen URL's zetten
 	SimpleRouter::get( '/not-found', function () {

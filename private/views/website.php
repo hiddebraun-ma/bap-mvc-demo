@@ -17,11 +17,7 @@
         <h1>BuurtBoodschappen</h1>
     </header>
     <nav>
-		<?php if ( $this->section( 'navigation' ) ): ?>
-			<?php echo $this->section( 'navigation' ) ?>
-		<?php else: ?>
-			<?php echo $this->fetch( '_navigation' ) ?>
-		<?php endif ?>
+	    <?php echo $this->section( 'navigation', $this->fetch( '_navigation' )) ?>
     </nav>
     <main>
         <section class="content">

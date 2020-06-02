@@ -27,16 +27,22 @@ class LoginController {
 			// Controleren of wachtwoord klopt (password_verify)
 			$user = getUserByEmail( $result['data']['email'] );
 
-			if(password_verify($result['data']['wachtwoord'], $user['wachtwoord'])){
+			// Kijken of de gebruiker wel actief is (code is NULL)
+			if ( is_null( $user['code'] ) ) {
 
-				// Gebruiker inloggen
-				loginUser($user);
+				if ( password_verify( $result['data']['wachtwoord'], $user['wachtwoord'] ) ) {
 
-				// Gebruiker doorsturen naar een eigen dashboard (alleen ingelogde gebruikers)
-				redirect(url('login.dashboard'));
+					// Gebruiker inloggen
+					loginUser( $user );
 
-			}else{
-				$result['errors']['wachtwoord'] = 'Wachtwoord is niet correct';
+					// Gebruiker doorsturen naar een eigen dashboard (alleen ingelogde gebruikers)
+					redirect( url( 'login.dashboard' ) );
+
+				} else {
+					$result['errors']['wachtwoord'] = 'Wachtwoord is niet correct';
+				}
+			} else {
+				$result['errors']['email'] = 'Dit account is nog niet actief!';
 			}
 		}
 
@@ -45,19 +51,19 @@ class LoginController {
 		echo $template_engine->render( 'login_form', [ 'errors' => $result['errors'] ] );
 	}
 
-	public function userDashboard(){
+	public function userDashboard() {
 
 		// Checken of je wel echt bent ingelogd
 		loginCheck();
 
 		$template_engine = get_template_engine();
-		echo $template_engine->render( 'user_dashboard');
+		echo $template_engine->render( 'user_dashboard' );
 
 	}
 
-	public function logout(  ) {
+	public function logout() {
 		logoutUser();
-		redirect(url('home'));
+		redirect( url( 'home' ) );
 	}
 
 
