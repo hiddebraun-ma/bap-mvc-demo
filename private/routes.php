@@ -19,6 +19,8 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/registreren/bedankt', 'RegistrationController@registrationThankYou' )->name( 'register.thankyou' );
 	SimpleRouter::get( '/registreren/bevestigen/{code}', 'RegistrationController@confirmRegistration' )->name( 'register.name' );
 
+	SimpleRouter::get( '/privacy-statement', 'WebsiteController@privacyStatement' )->name( 'privacy' );
+
 	// Login routes
 	SimpleRouter::get( '/login', 'LoginController@loginForm' )->name( 'login.form' );
 	SimpleRouter::post( '/login/verwerken', 'LoginController@handleLoginForm' )->name( 'login.handle' );
@@ -26,9 +28,13 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 
 	SimpleRouter::get( '/ingelogd/dashboard', 'LoginController@userDashboard' )->name( 'login.dashboard' );
 	SimpleRouter::get( '/stuur-test-email', 'EmailController@sendTestEmail' )->name( 'email.test' );
+	SimpleRouter::get('/bekijk-test-email', 'EmailController@viewTestEmail')->name('email.view');
 
 	SimpleRouter::get( '/blogs', 'BlogController@blogIndex' )->name( 'blog.index' );
 	SimpleRouter::get( '/blogs/{id}', 'BlogController@blogDetail' )->name( 'blog.detail' );
+
+	SimpleRouter::get('/contact', 'ContactController@showContactForm')->name('contact.form');
+	SimpleRouter::post('/contact/versturen', 'ContactController@handleContactForm')->name('contact.handle');
 
 	// STOP: Tot hier al je eigen URL's zetten
 	SimpleRouter::get( '/not-found', function () {

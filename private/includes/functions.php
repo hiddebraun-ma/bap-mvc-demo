@@ -88,7 +88,7 @@ function current_route_is( $name ) {
 
 }
 
-function validateRegistrationData($data){
+function validateRegistrationData( $data ) {
 
 	$errors = [];
 
@@ -107,18 +107,18 @@ function validateRegistrationData($data){
 
 	// Resultaat array
 	$data = [
-		'email' => $data['email'],
+		'email'      => $data['email'],
 		'wachtwoord' => $wachtwoord
 	];
 
 	return [
-		'data' => $data,
+		'data'   => $data,
 		'errors' => $errors
 	];
 
 }
 
-function userNotRegistered($email){
+function userNotRegistered( $email ) {
 
 	// Checken of de gebruiker al bestaat
 	$connection = dbConnect();
@@ -126,20 +126,20 @@ function userNotRegistered($email){
 	$statement  = $connection->prepare( $sql );
 	$statement->execute( [ 'email' => $email ] );
 
-	return ($statement->rowCount() === 0);
+	return ( $statement->rowCount() === 0 );
 
 }
 
-function loginUser($user){
+function loginUser( $user ) {
 	$_SESSION['user_id'] = $user['id'];
 }
 
-function logoutUser(){
-	unset($_SESSION['user_id']);
+function logoutUser() {
+	unset( $_SESSION['user_id'] );
 }
 
-function isLoggedIn(){
-	return !empty( $_SESSION['user_id'] );
+function isLoggedIn() {
+	return ! empty( $_SESSION['user_id'] );
 }
 
 function loginCheck() {
@@ -149,18 +149,18 @@ function loginCheck() {
 	}
 }
 
-function getLoggedInUserEmail(){
+function getLoggedInUserEmail() {
 
 	$email = "NIET INGELOGD";
 
-	if(!isLoggedIn()){
+	if ( ! isLoggedIn() ) {
 		return $email;
 	}
 
 	$user_id = $_SESSION['user_id'];
-	$user = getUserById($user_id);
+	$user    = getUserById( $user_id );
 
-	if($user){
+	if ( $user ) {
 		$email = $user['email'];
 	}
 
@@ -177,8 +177,8 @@ function getLoggedInUserEmail(){
 function getSwiftMailer() {
 	$mail_config = get_config( 'MAIL' );
 	$transport   = new \Swift_SmtpTransport( $mail_config['SMTP_HOST'], $mail_config['SMTP_PORT'] );
-	$transport->setUsername($mail_config['SMTP_USER'] );
-	$transport->setPassword($mail_config['SMTP_PASSWORD']);
+	$transport->setUsername( $mail_config['SMTP_USER'] );
+	$transport->setPassword( $mail_config['SMTP_PASSWORD'] );
 
 	$mailer = new \Swift_Mailer( $transport );
 
@@ -219,23 +219,28 @@ function embedImage( $message, $filename ) {
 		throw new \RuntimeException( 'Afbeelding bestaat niet: ' . $image_path );
 	}
 
-	$cid = $message->embed( \Swift_Image::fromPath( $image_path ) );
+	if ( $message ) {
+		$cid = $message->embed( \Swift_Image::fromPath( $image_path ) );
 
-	return $cid;
+		return $cid;
+	}
+
+	return site_url('/images/email/' . $filename );
+
 }
 
-function sendConfirmationEmail($email, $code){
+function sendConfirmationEmail( $email, $code ) {
 
-	$url = url('register.name', ['code' => $code]);
-	$absolute_url = absolute_url($url);
+	$url          = url( 'register.name', [ 'code' => $code ] );
+	$absolute_url = absolute_url( $url );
 
-	$mailer = getSwiftMailer();
-	$message = createEmailMessage($email, 'Bevestig je account', 'BuurtBoodschappen website', 'h.braun@ma-web.nl');
+	$mailer  = getSwiftMailer();
+	$message = createEmailMessage( $email, 'Bevestig je account', 'BuurtBoodschappen website', 'h.braun@ma-web.nl' );
 
 	$email_text = 'Hoi, bevestig nu je account: <a href="' . $absolute_url . '">klik hier</a>';
 
-	$message->setBody($email_text, 'text/html');
-	$mailer->send($message);
+	$message->setBody( $email_text, 'text/html' );
+	$mailer->send( $message );
 }
 
 
@@ -244,14 +249,14 @@ function sendConfirmationEmail($email, $code){
  *
  * @param string $code The code to confirm
  */
-function confirmAccount($code){
+function confirmAccount( $code ) {
 
 	$connection = dbConnect();
 	$sql        = "UPDATE `gebruikers` SET `code` = NULL WHERE `code` = :code";
-	$statement = $connection->prepare( $sql );
-	$params = [
+	$statement  = $connection->prepare( $sql );
+	$params     = [
 		'code' => $code
 	];
-	$statement->execute($params);
+	$statement->execute( $params );
 }
 

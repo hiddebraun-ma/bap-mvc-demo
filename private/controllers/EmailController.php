@@ -8,16 +8,31 @@ namespace Website\Controllers;
  */
 class EmailController {
 
-	public function sendTestEmail(  ) {
+	public function sendTestEmail() {
 
 		$mailer = getSwiftMailer();
 
-		$message = createEmailMessage('donald@trump.com', 'Dit is een test e-mail', 'Hidde Braun', 'h.braun@ma-web.nl');
-		$message->setBody('Dit is de inhoud van mijn test bericht!');
+		$message = createEmailMessage( 'h.braun@ma-web.nl', 'Dit is een test e-mail', 'Hidde Braun', 'h.braun@ma-web.nl' );
 
-		$aantal_verstuurd = $mailer->send($message);
+		$template_engine = get_template_engine();
+		$html            = $template_engine->render( 'email', [ 'message' => $message ] );
+
+		$message->setBody( $html, 'text/html' );
+		$message->addPart( "Dit is de tekst versie", 'text/plain' );
+
+		$aantal_verstuurd = $mailer->send( $message );
 
 		echo "Aantal = " . $aantal_verstuurd;
+
+	}
+
+	public function viewTestEmail() {
+
+		$mailer  = getSwiftMailer();
+		$message = createEmailMessage( 'h.braun@ma-web.nl', 'Dit is een test e-mail', 'Hidde Braun', 'h.braun@ma-web.nl' );
+
+		$template_engine = get_template_engine();
+		echo $template_engine->render( 'email', [ 'message' => null ] );
 
 	}
 

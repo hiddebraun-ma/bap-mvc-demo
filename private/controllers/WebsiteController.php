@@ -19,5 +19,11 @@ class WebsiteController {
 
 	}
 
+	public function privacyStatement(){
+
+		echo "Privacy statement";
+
+	}
+
 }
 

@@ -7,9 +7,7 @@
     <title>Homepage</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo site_url( '/css/style.css' ) ?>" media="all">
-	<?php if ( $this->section( 'css' ) ): ?>
-		<?php echo $this->section( 'css' ) ?>
-	<?php endif; ?>
+	<?php echo $this->section( 'css' ) ?>
 </head>
 <body>
 <div class="container">
@@ -17,7 +15,7 @@
         <h1>BuurtBoodschappen</h1>
     </header>
     <nav>
-	    <?php echo $this->section( 'navigation', $this->fetch( '_navigation' )) ?>
+	    <?php echo $this->insert( 'partials/_navigation') ?>
     </nav>
     <main>
         <section class="content">
