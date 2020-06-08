@@ -20,6 +20,8 @@
 
 <h1>Welkom</h1>
 
+<a href="<?php echo url('contact.form')?>">Contact</a>
+
 <p>Hier komt later veel meer informatie uit de database</p>
 
 

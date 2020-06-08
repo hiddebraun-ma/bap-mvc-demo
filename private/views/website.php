@@ -15,8 +15,27 @@
         <h1>BuurtBoodschappen</h1>
     </header>
     <nav>
-	    <?php echo $this->insert( 'partials/_navigation') ?>
+		<?php echo $this->insert( 'partials/_navigation' ) ?>
     </nav>
+    <div class="search-form">
+        <form action="<?php echo url( 'search' ) ?>" class="form" method="POST">
+            <div class="row">
+                <div class="col-12 col-sm-3 col-md-2">
+                    <select class="form-control" name="zoek_column">
+                        <option value="titel"<?php if(input('zoek_column') === 'titel'):?> selected<?php endif;?>>Zoek in titels</option>
+                        <option value="content"<?php if(input('zoek_column') === 'content'):?> selected<?php endif;?>>Zoek in inhoud</option>
+                        <option value="auteur"<?php if(input('zoek_column') === 'auteur'):?> selected<?php endif;?>>Zoek in auteurs</option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-5 col-md-8">
+                    <input type="text" name="zoekterm" class="form-control" placeholder="... naar" value="<?php echo input('zoekterm')?>">
+                </div>
+                <div class="col-12 col-sm-4 col-md-2">
+                    <button type="submit" class="btn btn-primary d-block">Zoeken</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <main>
         <section class="content">
 			<?php echo $this->section( 'content' ) ?>

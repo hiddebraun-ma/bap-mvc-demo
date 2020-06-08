@@ -73,6 +73,28 @@ function getUserByCode( $code ) {
 
 }
 
+/**
+ * Zoek in de blogs naar de zoekterm in de opgegeven zoek column
+ *
+ * @param string $zoekterm
+ * @param string $zoek_column
+ *
+ * @return array
+ */
+function searchBlogs( $zoekterm, $zoek_column = 'titel' ) {
+
+	$sql        = "SELECT * FROM `blogs` WHERE `" . $zoek_column . "` LIKE :zoekterm";
+	$connection = dbConnect();
+	$statement  = $connection->prepare( $sql );
+	$params     = [
+		'zoekterm' => '%' . $zoekterm . '%'
+	];
+	$statement->execute( $params );
+
+	return $statement->fetchAll();
+
+}
+
 
 function getAllBlogs() {
 	$connection = dbConnect();

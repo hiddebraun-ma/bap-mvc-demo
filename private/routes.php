@@ -33,8 +33,10 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/blogs', 'BlogController@blogIndex' )->name( 'blog.index' );
 	SimpleRouter::get( '/blogs/{id}', 'BlogController@blogDetail' )->name( 'blog.detail' );
 
-	SimpleRouter::get('/contact', 'ContactController@showContactForm')->name('contact.form');
+	SimpleRouter::get('/contact-formulier', 'ContactController@showContactForm')->name('contact.form');
 	SimpleRouter::post('/contact/versturen', 'ContactController@handleContactForm')->name('contact.handle');
+
+	SimpleRouter::post('/zoeken', 'SearchController@search')->name('search');
 
 	// STOP: Tot hier al je eigen URL's zetten
 	SimpleRouter::get( '/not-found', function () {

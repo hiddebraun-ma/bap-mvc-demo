@@ -114,6 +114,10 @@ footer {
     padding: 10px;
 }
 
+.search-form {
+    margin: 10px 0;
+}
+
 @media screen and (min-width: 900px) {
     main {
         grid-template-columns: 1fr 350px;

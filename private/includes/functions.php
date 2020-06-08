@@ -176,7 +176,7 @@ function getLoggedInUserEmail() {
  */
 function getSwiftMailer() {
 	$mail_config = get_config( 'MAIL' );
-	$transport   = new \Swift_SmtpTransport( $mail_config['SMTP_HOST'], $mail_config['SMTP_PORT'] );
+	$transport   = new \Swift_SmtpTransport( $mail_config['SMTP_HOST'], $mail_config['SMTP_PORT']);
 	$transport->setUsername( $mail_config['SMTP_USER'] );
 	$transport->setPassword( $mail_config['SMTP_PASSWORD'] );
 
