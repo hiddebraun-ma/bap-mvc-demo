@@ -28,15 +28,21 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 
 	SimpleRouter::get( '/ingelogd/dashboard', 'LoginController@userDashboard' )->name( 'login.dashboard' );
 	SimpleRouter::get( '/stuur-test-email', 'EmailController@sendTestEmail' )->name( 'email.test' );
-	SimpleRouter::get('/bekijk-test-email', 'EmailController@viewTestEmail')->name('email.view');
+	SimpleRouter::get( '/bekijk-test-email', 'EmailController@viewTestEmail' )->name( 'email.view' );
 
 	SimpleRouter::get( '/blogs', 'BlogController@blogIndex' )->name( 'blog.index' );
 	SimpleRouter::get( '/blogs/{id}', 'BlogController@blogDetail' )->name( 'blog.detail' );
 
-	SimpleRouter::get('/contact-formulier', 'ContactController@showContactForm')->name('contact.form');
-	SimpleRouter::post('/contact/versturen', 'ContactController@handleContactForm')->name('contact.handle');
+	SimpleRouter::get( '/contact-formulier', 'ContactController@showContactForm' )->name( 'contact.form' );
+	SimpleRouter::post( '/contact/versturen', 'ContactController@handleContactForm' )->name( 'contact.handle' );
 
-	SimpleRouter::post('/zoeken', 'SearchController@search')->name('search');
+	SimpleRouter::post( '/zoeken', 'SearchController@search' )->name( 'search' );
+
+	SimpleRouter::get( '/corona', 'CoronaController@index' )->name( 'corona.index' );
+	SimpleRouter::get( '/corona/{country}', 'CoronaController@countryDetails' )
+	            ->name( 'corona.details' )
+				->where(['country' => '[A-Za-z0-9\-]+']);
+
 
 	// STOP: Tot hier al je eigen URL's zetten
 	SimpleRouter::get( '/not-found', function () {

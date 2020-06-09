@@ -114,6 +114,54 @@ footer {
     padding: 10px;
 }
 
+.corona-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.corona-stats__country {
+    background: #5d89f1;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: block;
+    color: #ffffff;
+}
+
+.corona-stats__country:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background: #224aa3;
+}
+
+.corona-stats__stat {
+    background: #5d89f1;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: block;
+}
+
+.corona-statuses {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.corona-statuses li {
+    background: #333333;
+    color: #ffffff;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.corona-statuses li a,.corona-statuses li a:hover  {
+    display: block;
+    padding: 5px 10px;
+    color: #fff;
+
+}
+
+
 .search-form {
     margin: 10px 0;
 }

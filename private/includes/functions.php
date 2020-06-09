@@ -259,4 +259,3 @@ function confirmAccount( $code ) {
 	];
 	$statement->execute( $params );
 }
-
