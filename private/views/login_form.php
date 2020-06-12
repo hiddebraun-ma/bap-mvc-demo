@@ -17,6 +17,9 @@
             <span class="error"><?php echo $errors['wachtwoord'] ?></span>
 		<?php endif; ?>
     </div>
+    <p>
+        <a href="<?php echo url('password.form')?>">Wachtwoord vergeten?</a>
+    </p>
     <button type="submit" class="btn btn-primary">Inloggen</button>
 </form>
 

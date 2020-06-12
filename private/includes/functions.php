@@ -176,7 +176,7 @@ function getLoggedInUserEmail() {
  */
 function getSwiftMailer() {
 	$mail_config = get_config( 'MAIL' );
-	$transport   = new \Swift_SmtpTransport( $mail_config['SMTP_HOST'], $mail_config['SMTP_PORT']);
+	$transport   = new \Swift_SmtpTransport( $mail_config['SMTP_HOST'], $mail_config['SMTP_PORT'] );
 	$transport->setUsername( $mail_config['SMTP_USER'] );
 	$transport->setPassword( $mail_config['SMTP_PASSWORD'] );
 
@@ -225,7 +225,7 @@ function embedImage( $message, $filename ) {
 		return $cid;
 	}
 
-	return site_url('/images/email/' . $filename );
+	return site_url( '/images/email/' . $filename );
 
 }
 
@@ -259,3 +259,33 @@ function confirmAccount( $code ) {
 	];
 	$statement->execute( $params );
 }
+
+function sendPasswordResetEmail( $email ) {
+
+	// Code genereren en opslaan bij dit email adres (gebruiker)
+	$reset_code = md5( uniqid( rand(), true ) );
+	$connection = dbConnect();
+	$sql        = "UPDATE `gebruikers` SET `password_reset` = :code WHERE `email` = :email";
+	$statement  = $connection->prepare( $sql );
+	$params     = [
+		'code'  => $reset_code,
+		'email' => $email
+	];
+	$statement->execute( $params );
+
+	// Link genereren met die code
+	$url          = url( 'password.reset', [ 'reset_code' => $reset_code ] );
+	$absolute_url = absolute_url( $url );
+
+	// Mail opstellen en versturen
+	$mailer  = getSwiftMailer();
+	$message = createEmailMessage( $email, 'Wachtwoord resetten', 'BuurtBoodschappen website', 'h.braun@ma-web.nl' );
+
+	$email_text = 'Hoi, klik hier om je wachtwoord te resetten: <a href="' . $absolute_url . '">wachtwoord resetten</a>';
+
+	$message->setBody( $email_text, 'text/html' );
+	$mailer->send( $message );
+
+}
+
+

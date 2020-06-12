@@ -2,7 +2,7 @@
 
 <h2>Contact</h2>
 
-<p>Laat ons weten waar we u mee kunnen helpen vai het formulier hier onder.</p>
+<p>Laat ons weten waar we u mee kunnen helpen via het formulier hier onder.</p>
 
 <form action="<?php echo url( 'contact.handle' ) ?>" method="POST">
     <div class="form-group">

@@ -33,7 +33,7 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/blogs', 'BlogController@blogIndex' )->name( 'blog.index' );
 	SimpleRouter::get( '/blogs/{id}', 'BlogController@blogDetail' )->name( 'blog.detail' );
 
-	SimpleRouter::get( '/contact-formulier', 'ContactController@showContactForm' )->name( 'contact.form' );
+	SimpleRouter::get( '/contact', 'ContactController@showContactForm' )->name( 'contact.form' );
 	SimpleRouter::post( '/contact/versturen', 'ContactController@handleContactForm' )->name( 'contact.handle' );
 
 	SimpleRouter::post( '/zoeken', 'SearchController@search' )->name( 'search' );
@@ -42,6 +42,9 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 	SimpleRouter::get( '/corona/{country}', 'CoronaController@countryDetails' )
 	            ->name( 'corona.details' )
 				->where(['country' => '[A-Za-z0-9\-]+']);
+
+	SimpleRouter::match(['get','post'], '/wachtwoord-vergeten', 'LoginController@passwordForgottenForm')->name('password.form');
+	SimpleRouter::match(['get','post'],'/wachtwoord-reset/{reset_code}', 'LoginController@passwordResetForm')->name('password.reset');
 
 
 	// STOP: Tot hier al je eigen URL's zetten

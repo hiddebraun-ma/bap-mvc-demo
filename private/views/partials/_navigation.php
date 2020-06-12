@@ -8,6 +8,9 @@
     <li>
         <a href="<?php echo url( 'corona.index' ) ?>"<?php if ( current_route_is( 'corona.index' ) ): ?> class="active"<?php endif ?>>Corona landen</a>
     </li>
+    <li>
+        <a href="<?php echo url( 'contact.form' ) ?>"<?php if ( current_route_is( 'contact.form' ) ): ?> class="active"<?php endif ?>>Contact</a>
+    </li>
 </ul>
 
 <div class="user-menu">
